@@ -1,0 +1,111 @@
+.container{
+    margin: 2rem auto;
+}
+.map, .inp, .district-btn, .districts{
+    background-color: #fff;
+}
+.map{
+    margin: 0 auto;
+    padding: 1rem 1rem 3rem;
+    width: 700px;
+    border: 2px solid #0059FF;
+}
+.inp, .district-btn{
+    margin: 0 auto;
+    padding: 0;
+    width: 700px;
+    border: 2px solid #0059FF;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.district-btn p, input{
+    padding: 0 .5rem;
+    width: 80%;
+    border-right: 2px solid transparent;
+    border-left: 2px solid transparent;
+}
+.score, .start-submit{
+    height: 40px;
+    width: 20%;
+    background-color: crimson;
+    background-image: url("./images/redbg.png");
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.score{
+    border-right: 2px solid #0059FF;
+}
+.start-submit{
+    border: none;
+    border-left: 2px solid #0059FF;
+}
+.districts{
+    margin: 0 auto;
+    padding: 1rem .5rem;
+    width: 700px;
+    border: 2px solid #0059FF;
+    border-top: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.districts span{
+    margin: .25rem;
+    padding: 0 .5rem;
+    background-color: crimson;
+    background-image: url(".images/redbg.png");
+    color: #fff;
+    border-radius: 5px;
+    line-height: 2.2rem;
+}
+.emojis{
+    margin: 1rem;
+    color: #daa520;
+}
+.districts i{
+    margin: 0 .25rem;
+    font-size: 2rem;
+}
+.districts p{
+    font-style: italic;
+    color: #797979;
+    text-align: center;
+}
+
+/* media queries */
+@media (max-width: 750px){
+    .map, .inp, .district-btn, .districts{
+        width: 600px;
+    }
+}
+@media (max-width: 650px){
+    .map, .inp, .district-btn, .districts{
+        width: 550px;
+    }
+}
+@media (max-width: 575px){
+    .map, .inp, .district-btn, .districts{
+        width: 500px;
+    }
+}
+@media (max-width: 525px){
+    .map, .inp, .district-btn, .districts{
+        width: 95vw;
+    }
+    .score, .start-submit{
+        width: 25%;
+    }
+}
+@media (max-width: 500px){
+    .district-btn p, input{
+        font-size: 1rem !important;
+    }
+}
+@media (max-width: 450px){
+    .score-txt{
+        display: none;
+    }
+}
