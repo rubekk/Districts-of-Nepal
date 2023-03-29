@@ -1,7 +1,6 @@
 <script>
     import RouteHeader from "./../../components/RouteHeader.svelte";
     import TypeMap from "../../components/TypeMap.svelte";
-    import redBg from "$lib/assets/redbg.svg";
     import { onMount } from "svelte";
     import "./../../app.css";
     import "./../route.css";
