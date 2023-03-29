@@ -1,7 +1,6 @@
 <script>
     import RouteHeader from "./../../components/RouteHeader.svelte";
 	import ClickMap from "./../../components/ClickMap.svelte";
-    import redBg from "$lib/assets/redbg.svg";
     import { districts, displayedDistricts, currDistrict, changeCurrDistrict } from "./../../stores/stores";
     import { onMount } from "svelte";
     import "./../../app.css";
