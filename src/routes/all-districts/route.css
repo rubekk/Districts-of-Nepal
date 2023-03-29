@@ -56,7 +56,7 @@
     margin: .25rem;
     padding: 0 .5rem;
     background-color: crimson;
-    background-image: url($lib/assets/redbg.svg);
+    background-image: url($lib/assets/redbg.png);
     color: #fff;
     border-radius: 5px;
     line-height: 2.2rem;
