@@ -1,12 +1,19 @@
 <script>
     import nepalMap from "$lib/assets/nepal-map.png";
     import "./app.css"; 
+    import { fade } from "svelte/transition";
     
     const link="https://districtsofnepal.netlify.app/",
 		fbLink=`https://facebook.com/share.php?u=${link}`,
 		twitterLink=`https://twitter.com/share?url=${link}`,
 		linkedinLink=`https://linkedin.com/sharing/share-offsite/?url=${link}`,
 		redditLink=`https://reddit.com/submit?url=${link}`;
+
+    let runAnimation=false;
+
+    setTimeout(()=>{
+        runAnimation=true
+    },500)
 </script>
 
 <div class="main">
@@ -35,7 +42,8 @@
 			</li>
         </div>
     </div>
-    <div class="container">
+    {#if runAnimation}
+    <div transition:fade class="container">
         <div class="card">
             <div class="card-img" id="img-1"></div>
             <div class="card-txt">
@@ -55,9 +63,10 @@
             </div>
         </div>
     </div>
-    <div class="footer">
+    <div transition:fade class="footer">
         <p class="credit">Created by <a href="https://linkedin.com/in/rubekk" target="_blank" rel="noreferrer">Rubek</a></p>
     </div>
+    {/if}
 </div>
 
 <style>

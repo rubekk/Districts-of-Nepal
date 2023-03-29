@@ -3,6 +3,7 @@
 	import ClickMap from "./../../components/ClickMap.svelte";
     import { districts, displayedDistricts, currDistrict, changeCurrDistrict } from "./../../stores/stores";
     import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
     import "./../../app.css";
     import "./../route.css";
 
@@ -12,7 +13,12 @@
         presDistrict="",
         started=false,
         submitted=false,
-        mobileTxt=false;
+        mobileTxt=false,
+        runAnimation=false;
+
+    setTimeout(()=>{
+        runAnimation=true
+    },500)
 
     districts.subscribe(value=>{
         allDistricts=value;
@@ -77,14 +83,15 @@
 
 <div class="main">
     <RouteHeader pageTitle={mobileTxt?"Click":"Click districts of Nepal"}/>
-    <div use:newLoad class="container">
-        <div class="map">
+    {#if runAnimation}
+    <div transition:fade use:newLoad class="container">
+        <div transition:fade class="map">
             <ClickMap/>
         </div>
         <div class="district-btn">
             <span class="score"><span class="score-txt">Score:</span> {score}</span>
             <p style={submitted?"font-size: 1.5rem; font-style: italic; color: #797979":""}>{capitalizeDistrict(presDistrict)}</p>
-            <button class="start-submit">{!started?"Start":"Submit"}</button>
+            <button on:click={handleStartSubmit} class="start-submit">{!started?"Start":"Submit"}</button>
         </div>
         <div class="districts" style={prevDistricts.length==0?"flex-direction: column; align-items: center;":""}>
             {#if prevDistricts.length>0}
@@ -101,4 +108,5 @@
             {/if} 
         </div>
     </div>
+    {/if}
 </div>

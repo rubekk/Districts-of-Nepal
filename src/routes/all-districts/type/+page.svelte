@@ -2,6 +2,7 @@
     import RouteHeader from "./../../components/RouteHeader.svelte";
     import TypeMap from "../../components/TypeMap.svelte";
     import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
     import "./../../app.css";
     import "./../route.css";
 
@@ -15,8 +16,13 @@
         started=false,
         submited=false,
         mobileTxt=false,
+        runAnimation=false,
         interval,
         inputElem;
+
+    setTimeout(()=>{
+        runAnimation=true
+    },500)
     
     onMount(async ()=>handleResize());
 
@@ -89,8 +95,9 @@
 <svelte:window on:resize={handleResize}></svelte:window>
 
 <div class="main">
-    <RouteHeader pageTitle={mobileTxt?"Click":"Click districts of Nepal"}/>
-    <div class="container">
+    <RouteHeader pageTitle={mobileTxt?"Type":"Type districts of Nepal"}/>
+    {#if runAnimation}
+    <div transition:fade class="container">
         <div class="map">
             <TypeMap districts={districts} userDistricts={userDistricts}/>
             <div class="time">{minutes.toString().length==1?`0${minutes}`:minutes}:{seconds.toString().length==1?`0${seconds}`:seconds}</div>
@@ -122,6 +129,7 @@
             {/if} 
         </div>
     </div>
+    {/if}
 </div>
 
 <style>
