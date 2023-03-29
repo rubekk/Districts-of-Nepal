@@ -1,6 +1,7 @@
 <script>
     import RouteHeader from "./../../components/RouteHeader.svelte";
 	import ClickMap from "./../../components/ClickMap.svelte";
+    import redBg from "$lib/assets/redbg.svg";
     import { districts, displayedDistricts, currDistrict, changeCurrDistrict } from "./../../stores/stores";
     import { onMount } from "svelte";
     import "./../../app.css";
@@ -84,7 +85,7 @@
         <div class="district-btn">
             <span class="score"><span class="score-txt">Score:</span> {score}</span>
             <p style={submitted?"font-size: 1.5rem; font-style: italic; color: #797979":""}>{capitalizeDistrict(presDistrict)}</p>
-            <button on:click={handleStartSubmit} class="start-submit">{!started?"Start":"Submit"}</button>
+            <button class="start-submit">{!started?"Start":"Submit"}</button>
         </div>
         <div class="districts" style={prevDistricts.length==0?"flex-direction: column; align-items: center;":""}>
             {#if prevDistricts.length>0}

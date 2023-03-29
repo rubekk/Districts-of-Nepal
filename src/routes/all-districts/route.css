@@ -30,7 +30,7 @@
     height: 40px;
     width: 20%;
     background-color: crimson;
-    background-image: url("./images/redbg.png");
+    background-image: url($lib/assets/redbg.png);
     color: #fff;
     display: flex;
     justify-content: center;
@@ -56,7 +56,7 @@
     margin: .25rem;
     padding: 0 .5rem;
     background-color: crimson;
-    background-image: url(".images/redbg.png");
+    background-image: url($lib/assets/redbg.svg);
     color: #fff;
     border-radius: 5px;
     line-height: 2.2rem;

@@ -1,6 +1,7 @@
 <script>
     import RouteHeader from "./../../components/RouteHeader.svelte";
     import TypeMap from "../../components/TypeMap.svelte";
+    import redBg from "$lib/assets/redbg.svg";
     import { onMount } from "svelte";
     import "./../../app.css";
     import "./../route.css";
@@ -98,7 +99,7 @@
         <div class="inp">
             <div class="score"><span class="score-txt">Score: </span>{score}</div>
             <input type="text" bind:this={inputElem} bind:value={currDistrict} on:input={handleInput} placeholder="Enter districts..." disabled={!started}>
-            <button class="start-submit" on:click={handleStartSubmit}>{!started?"Start":score>0?"Submit":"Started"}</button>
+            <button on:click={handleStartSubmit} class="start-submit">{!started?"Start":score>0?"Submit":"Started"}</button>
         </div>
         <div class="districts" style={userDistricts.length==0?"flex-direction: column; align-items: center;":""}>
             {#if userDistricts.length>0}
@@ -141,7 +142,7 @@
         font-size: 1.2rem;
         color: #fff;
         background-color: crimson;
-        background-image: url("./../../../imgs/redbg.png");
+        background-image: url($lib/assets/redbg.png);
     }
 
     /* media queries */

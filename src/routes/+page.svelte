@@ -1,4 +1,5 @@
-<script>  
+<script>
+    import nepalMap from "$lib/assets/nepal-map.png";
     import "./app.css"; 
     
     const link="https://districtsofnepal.netlify.app/",
@@ -15,7 +16,7 @@
                 <p class="t-blue">Districts of</p>
             </div>
             <div class="title-down">
-                <img src="./images/nepal-map.png" alt="Nepal Map">
+                <img src={nepalMap} alt="Nepal Map">
                 <p class="t-red">Nepal</p>
             </div>
         </h2>
@@ -124,10 +125,10 @@
         transform: scale(1.01);
     }
     #img-1{
-        background-image: url("./images/type.svg");
+        background-image: url($lib/assets/type.svg);
     }
     #img-2{
-        background-image: url("./images/click.svg");
+        background-image: url($lib/assets/click.svg);
     }
     .card-txt{
         padding: 1.25rem 1rem;
@@ -142,7 +143,7 @@
         padding: 0.5rem 1rem;
         font-style: italic;
         background-color: crimson;
-        background-image: url("./images/redbg.png");
+        background-image: url($lib/assets/redbg.png);
         color: #fff;
         border: none;
         border-radius: 3px;
