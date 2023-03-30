@@ -1,8 +1,8 @@
-export const config = {
-    apiKey: "AIzaSyATYI7OpT3WW3fBdKm8V2ReV3mMol4s7gA",
-    authDomain: "practice-2e064.firebaseapp.com",
-    projectId: "practice-2e064",
-    storageBucket: "practice-2e064.appspot.com",
-    messagingSenderId: "310813243517",
-    appId: "1:310813243517:web:c486bc18da7d2da70f5914"
-  };
+export const firebaseConfig = {
+  apiKey: "AIzaSyByFShOcsr58iy6HyIDmVug2cRJI60zmuQ",
+  authDomain: "districts-of-nepal.firebaseapp.com",
+  projectId: "districts-of-nepal",
+  storageBucket: "districts-of-nepal.appspot.com",
+  messagingSenderId: "557788994043",
+  appId: "1:557788994043:web:e828556090e2bb75ca535e"
+};

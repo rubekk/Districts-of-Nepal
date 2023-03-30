@@ -3,6 +3,9 @@
     import TypeMap from "../../components/TypeMap.svelte";
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
+    import { initializeApp } from "firebase/app";
+	import { getFirestore, collection, addDoc } from "firebase/firestore";
+    import { firebaseConfig } from "$lib/firebaseConfig";
     import "./../../app.css";
     import "./../route.css";
 
@@ -20,6 +23,9 @@
         interval,
         inputElem;
 
+    const firebaseApp=initializeApp(firebaseConfig);
+	const db=getFirestore();
+
     setTimeout(()=>{
         runAnimation=true
     },500)
@@ -34,7 +40,7 @@
         }   
         score=userDistricts.length;
     }
-    const handleStartSubmit=()=>{
+    const handleStartSubmit=async ()=>{
         if(!started && !submited){
             started=true;
             seconds=0;
@@ -53,6 +59,13 @@
             clearInterval(interval);
             inputElem.placeholder="Your score is "+score+" / 77";
             inputElem.style.fontSize="1.5rem";
+
+            // add data to firebase
+            await addDoc(collection(db, "type-districts"), {
+				districts: userDistricts,
+                score: score,
+                createdAt: new Date()
+			})
         }
         else if(submited){
             started=true;

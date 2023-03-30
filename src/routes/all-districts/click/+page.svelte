@@ -4,6 +4,9 @@
     import { districts, displayedDistricts, currDistrict, changeCurrDistrict } from "./../../stores/stores";
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
+    import { initializeApp } from "firebase/app";
+	import { getFirestore, collection, addDoc } from "firebase/firestore";
+    import { firebaseConfig } from "$lib/firebaseConfig";
     import "./../../app.css";
     import "./../route.css";
 
@@ -15,6 +18,9 @@
         submitted=false,
         mobileTxt=false,
         runAnimation=false;
+    
+    const firebaseApp=initializeApp(firebaseConfig);
+	const db=getFirestore();
 
     setTimeout(()=>{
         runAnimation=true
@@ -32,7 +38,7 @@
 
     onMount(async ()=>handleResize());
 
-    const handleStartSubmit=()=>{
+    const handleStartSubmit=async ()=>{
         if(!started) { //when start button is clicked
             started=true;
             submitted=false;
@@ -49,6 +55,12 @@
                 submitted=true;
                 presDistrict="Your score is "+score+"/77";
                 changeCurrDistrict.set(false);
+
+                await addDoc(collection(db, "click-districts"), {
+                    districts: prevDistricts,
+                    score: score,
+                    createdAt: new Date()
+                })
             } 
         }
     }
