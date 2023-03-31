@@ -9,6 +9,15 @@
     padding: 1rem 1rem 3rem;
     width: 700px;
     border: 2px solid #0059FF;
+    position: relative;
+}
+.hover-district{
+    margin: auto;
+    width: max-content;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
 }
 .inp, .district-btn{
     margin: 0 auto;

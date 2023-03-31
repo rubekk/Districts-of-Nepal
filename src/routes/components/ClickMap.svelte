@@ -1,9 +1,11 @@
 <script>
+    export let showDistricts;
 	import {
 		districts,
 		displayedDistricts,
 		changeCurrDistrict,
-		currDistrict
+		currDistrict,
+        currClickHoverDistrict
 	} from './../stores/stores';
 
 	let allDistricts, prevDistricts, changeDistrict, presDistrict, svgElem;
@@ -21,6 +23,16 @@
 		presDistrict = value;
 	});
 
+    const handleMouseover=e=>{
+        if(!showDistricts || e.target.localName!="polygon"){
+            currClickHoverDistrict.set("");
+            return;
+        }
+        currClickHoverDistrict.set(e.target.getAttribute("id").includes("-")?e.target.getAttribute("id").replace("-"," "):e.target.getAttribute("id"));
+    }
+    const handleMouseleave=()=>{
+        currClickHoverDistrict.set("");
+    }
 	const handleMapClick = (e) => {
 		if (e.target.localName != 'polygon' || !changeDistrict || prevDistricts.length >= 77) return;
 
@@ -74,6 +86,8 @@
 	xml:space="preserve"
     bind:this={svgElem}
     on:click={handleMapClick}
+    on:mouseover={handleMouseover}
+    on:mouseleave={handleMouseleave}
 >
 	<g class="full-map">
 		<g>

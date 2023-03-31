@@ -1,7 +1,7 @@
 <script>
     import RouteHeader from "./../../components/RouteHeader.svelte";
 	import ClickMap from "./../../components/ClickMap.svelte";
-    import { districts, displayedDistricts, currDistrict, changeCurrDistrict } from "./../../stores/stores";
+    import { districts, displayedDistricts, currDistrict, changeCurrDistrict, currClickHoverDistrict } from "./../../stores/stores";
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
     import { initializeApp } from "firebase/app";
@@ -14,9 +14,11 @@
         allDistricts=[],
         prevDistricts=[],
         presDistrict="",
+        presClickHoverDistrict,
         started=false,
         submitted=false,
         mobileTxt=false,
+        showDistricts=false,
         runAnimation=false;
     
     const firebaseApp=initializeApp(firebaseConfig);
@@ -26,15 +28,10 @@
         runAnimation=true
     },500)
 
-    districts.subscribe(value=>{
-        allDistricts=value;
-    })
-    displayedDistricts.subscribe(value=>{
-        prevDistricts=value;
-    })
-    currDistrict.subscribe(value=>{
-        presDistrict=value;
-    })
+    districts.subscribe(value => allDistricts=value);
+    displayedDistricts.subscribe(value => prevDistricts=value);
+    currDistrict.subscribe(value => presDistrict=value);
+    currClickHoverDistrict.subscribe(value => presClickHoverDistrict=value);
 
     onMount(async ()=>handleResize());
 
@@ -42,6 +39,7 @@
         if(!started) { //when start button is clicked
             started=true;
             submitted=false;
+            showDistricts=false;
             prevDistricts=[];
             displayedDistricts.set([]);
             changeCurrDistrict.set(true);
@@ -53,6 +51,7 @@
             if(prevDistricts.length>0){
                 started=false;
                 submitted=true;
+                showDistricts=true;
                 presDistrict="Your score is "+score+"/77";
                 changeCurrDistrict.set(false);
 
@@ -84,6 +83,7 @@
         if(prevDistricts.length==77) {
             started=false;
             submitted=true;
+            showDistricts=true;
             presDistrict="Your score is "+score+"/77";
             changeCurrDistrict.set(false);
 
@@ -103,7 +103,10 @@
     {#if runAnimation}
     <div transition:fade use:newLoad class="container">
         <div transition:fade class="map">
-            <ClickMap/>
+            <ClickMap showDistricts={showDistricts}/>
+            {#if presClickHoverDistrict && showDistricts}
+                <div class="hover-district">{presClickHoverDistrict}</div>
+            {/if}
         </div>
         <div class="district-btn">
             <span class="score"><span class="score-txt">Score:</span> {score}</span>

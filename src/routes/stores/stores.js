@@ -9,3 +9,7 @@ export let displayedDistricts= writable([]);
 export let changeCurrDistrict= writable(false);
 
 export let currDistrict= writable("");
+
+export let currTypeHoverDistrict= writable("hello");
+
+export let currClickHoverDistrict= writable("");

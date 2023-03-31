@@ -1,8 +1,24 @@
 <script>
     export let districts,
-        userDistricts;
+        userDistricts,
+        showDistricts;
+    import {
+		currTypeHoverDistrict
+	} from './../stores/stores';
 
     let svgElem;
+
+    const handleMouseover=e=>{
+        if(!showDistricts || e.target.localName!="polygon"){
+            currTypeHoverDistrict.set("");
+            return;
+        }
+        currTypeHoverDistrict.set(e.target.getAttribute("id").includes("-")?e.target.getAttribute("id").replace("-"," "):e.target.getAttribute("id"));
+    }
+
+    const handleMouseleave=()=>{
+        currTypeHoverDistrict.set("");
+    }
 
     $: {
         if(svgElem){
@@ -31,6 +47,8 @@
 	style="enable-background:new 0 0 1086.4 543.9;"
 	xml:space="preserve"
     bind:this={svgElem}
+    on:mouseover={handleMouseover}
+    on:mouseleave={handleMouseleave}
 >
 	<g class="full-map">
 		<g>
