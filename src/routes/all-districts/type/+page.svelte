@@ -40,7 +40,7 @@
         }   
         score=userDistricts.length;
     }
-    const handleStartSubmit=async ()=>{
+    const handleStartSubmit=()=>{
         if(!started && !submited){
             started=true;
             seconds=0;
@@ -60,12 +60,7 @@
             inputElem.placeholder="Your score is "+score+" / 77";
             inputElem.style.fontSize="1.5rem";
 
-            // add data to firebase
-            await addDoc(collection(db, "type-districts"), {
-				districts: userDistricts,
-                score: score,
-                createdAt: new Date()
-			})
+            addToFirebase();
         }
         else if(submited){
             started=true;
@@ -102,6 +97,26 @@
     }
     const handleResize=()=>{
         mobileTxt=window.innerWidth>450?false:true;
+    }
+    const addToFirebase=async ()=>{
+        await addDoc(collection(db, "type-districts"), {
+            districts: userDistricts,
+            score: score,
+            createdAt: new Date()
+        })
+    }
+
+    $: {
+        if(score==77){
+            started=false;
+            submited=true;
+            clearInterval(interval);
+
+            inputElem.placeholder="You scored "+score+" / 77";
+            inputElem.style.fontSize="1.5rem";
+
+            addToFirebase();
+        }
     }
 </script>
 

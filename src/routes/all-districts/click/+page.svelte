@@ -38,7 +38,7 @@
 
     onMount(async ()=>handleResize());
 
-    const handleStartSubmit=async ()=>{
+    const handleStartSubmit=()=>{
         if(!started) { //when start button is clicked
             started=true;
             submitted=false;
@@ -56,11 +56,7 @@
                 presDistrict="Your score is "+score+"/77";
                 changeCurrDistrict.set(false);
 
-                await addDoc(collection(db, "click-districts"), {
-                    districts: prevDistricts,
-                    score: score,
-                    createdAt: new Date()
-                })
+                addToFirebase()
             } 
         }
     }
@@ -76,6 +72,13 @@
     const handleResize=()=>{
         mobileTxt=window.innerWidth>450?false:true;
     }
+    const addToFirebase=async ()=>{
+        await addDoc(collection(db, "click-districts"), {
+            districts: prevDistricts,
+            score: score,
+            createdAt: new Date()
+        })
+    }
 
     $: {
         if(prevDistricts.length==77) {
@@ -83,6 +86,8 @@
             submitted=true;
             presDistrict="Your score is "+score+"/77";
             changeCurrDistrict.set(false);
+
+            addToFirebase();
         }
         score=0;
         prevDistricts.forEach(item=>{
